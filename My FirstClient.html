@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazon Style Product Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #0f1111;
+    }
+
+    a {
+      text-decoration: none;
+      color: #007185;
+    }
+
+    a:hover {
+      color: #c7511f;
+    }
+
+    /* TOP HEADER */
+    .top-header {
+      background-color: #131921;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    .top-header .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff9900;
+    }
+
+    .delivery {
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .search-bar {
+      flex: 1;
+      display: flex;
+      min-width: 250px;
+      max-width: 700px;
+    }
+
+    .search-bar select,
+    .search-bar input,
+    .search-bar button {
+      border: none;
+      outline: none;
+      padding: 10px;
+    }
+
+    .search-bar select {
+      background: #f3f3f3;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .search-bar input {
+      flex: 1;
+    }
+
+    .search-bar button {
+      background: #febd69;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .header-links {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      flex-wrap: wrap;
+    }
+
+    .header-links div span {
+      display: block;
+      font-size: 12px;
+      color: #ddd;
+    }
+
+    /* SECOND NAV */
+    .sub-nav {
+      background: #232f3e;
+      color: white;
+      padding: 10px 20px;
+      font-size: 14px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .sub-nav a {
+      color: white;
+    }
+
+    /* MAIN */
+    .container {
+      width: 95%;
+      max-width: 1400px;
+      margin: 20px auto;
+    }
+
+    .breadcrumb {
+      font-size: 13px;
+      color: #565959;
+      margin-bottom: 15px;
+    }
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr 320px;
+      gap: 25px;
+      align-items: start;
+    }
+
+    /* LEFT IMAGE */
+    .product-image {
+      text-align: center;
+    }
+
+    .product-image img {
+      width: 100%;
+      max-width: 260px;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .sample-btn {
+      margin-top: 15px;
+      display: inline-block;
+      width: 220px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* CENTER INFO */
+    .product-info h1 {
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .author {
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .stars {
+      color: #ffa41c;
+      font-size: 18px;
+    }
+
+    .series-link {
+      font-size: 14px;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+
+    .description-box {
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+      margin-bottom: 18px;
+    }
+
+    .description-box p {
+      margin-bottom: 12px;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .highlight {
+      font-weight: bold;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+      margin-top: 15px;
+      text-align: center;
+      font-size: 13px;
+      color: #565959;
+    }
+
+    .details-grid div {
+      padding: 10px;
+      border-top: 1px solid #eee;
+    }
+
+    .details-grid strong {
+      display: block;
+      color: #0f1111;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    /* RIGHT BUY BOX */
+    .buy-box {
+      border: 1px solid #d5d9d9;
+      border-radius: 8px;
+      padding: 18px;
+      background: #fff;
+    }
+
+    .prime-box {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 15px;
+      background: #fafafa;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .format-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .format-card {
+      border: 1px solid #c7c7c7;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      background: white;
+    }
+
+    .format-card strong {
+      display: block;
+      margin-top: 5px;
+    }
+
+    .format-card.active {
+      border: 2px solid #007185;
+      background: #f0fbff;
+    }
+
+    .price {
+      font-size: 34px;
+      margin: 12px 0 5px;
+    }
+
+    .price sup {
+      font-size: 18px;
+      vertical-align: top;
+    }
+
+    .delivery {
+      font-size: 14px;
+      margin-top: 8px;
+      color: #0f1111;
+    }
+
+    .delivery a {
+      font-size: 14px;
+    }
+
+    .stock {
+      color: #007600;
+      font-size: 19px;
+      margin: 15px 0;
+    }
+
+    .qty-row {
+      margin: 15px 0;
+    }
+
+    .qty-row label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      background: #f0f2f2;
+    }
+
+    .cart-btn,
+    .buy-btn {
+      width: 100%;
+      border: none;
+      border-radius: 20px;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .cart-btn {
+      background: #ffd814;
+    }
+
+    .buy-btn {
+      background: #ffa41c;
+    }
+
+    .small-note {
+      font-size: 12px;
+      color: #565959;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .product-layout {
+        grid-template-columns: 260px 1fr;
+      }
+
+      .buy-box {
+        grid-column: 1 / -1;
+      }
+
+      .details-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .product-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image,
+      .product-info,
+      .buy-box {
+        width: 100%;
+      }
+
+      .details-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product-info h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="top-header">
+    <div class="row">
+      <div class="logo">amazon</div>
+
+      <div class="delivery">
+        <div>Deliver to</div>
+        <strong>Calgary T2R 1C</strong>
+      </div>
+
+      <div class="search-bar">
+        <select>
+          <option>All</option>
+          <option>Books</option>
+          <option>Kindle Store</option>
+        </select>
+        <input type="text" placeholder="Search Amazon" />
+        <button>Search</button>
+      </div>
+
+      <div class="header-links">
+        <div><span>Hello, Sign in</span><strong>Account & Lists</strong></div>
+        <div><span>Returns</span><strong>& Orders</strong></div>
+        <div><span>0</span><strong>Cart</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <a href="#">All</a>
+    <a href="#">Today's Deals</a>
+    <a href="#">Customer Service</a>
+    <a href="#">Books</a>
+    <a href="#">New Releases</a>
+    <a href="#">Best Sellers</a>
+    <a href="#">Gift Cards</a>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="container">
+    <div class="breadcrumb">
+      Books &gt; Children's Books &gt; Literature & Fiction &gt; Action & Adventure
+    </div>
+
+    <section class="product-layout">
+      <!-- LEFT -->
+      <div class="product-image">
+  <img src="C:\ABMCOLEGE\SchoolDemo\book-cover.jpg" alt="Book Cover" />
+  <button class="sample-btn">Read sample</button>
+</div>
+
+      <!-- CENTER -->
+      <div class="product-info">
+        <h1>The Wings of Fire: The Brightest Night: A Graphic Novel (Wings of Fire Graphic Novel #5)</h1>
+
+        <div class="author">
+          by <a href="#">Tui T. Sutherland</a> and <a href="#">Mike Holmes</a> (Illustrator)
+        </div>
+
+        <div class="rating-row">
+          <span>4.8</span>
+          <span class="stars">★★★★☆</span>
+          <a href="#">7,014 ratings</a>
+        </div>
+
+        <a class="series-link" href="#">Book 5 of 10: Wings of Fire Graphic</a>
+
+        <div class="description-box">
+          <p class="highlight">
+            The graphic novel adaptations of the #1 New York Times bestselling Wings of Fire series continue to set the world on fire!
+          </p>
+
+          <p>
+            One will have the power of wings of fire . . .
+          </p>
+
+          <p>
+            Sunny has always taken the Dragonet Prophecy very seriously. If Pyrrhia’s dragons need her, Clay, Tsunami, Glory, and Starflight to end the war, she’s ready to try.
+          </p>
+
+          <p>
+            But shattering news from Morrowseer has shaken Sunny’s faith in their destiny. Is it possible for anyone to end this terrible war and choose a new SandWing queen?
+          </p>
+
+          <p>
+            Buried secrets, deadly surprises, and an unexpected side to scavengers are all waiting for her in the shifting sands of the desert, where Sunny must decide once and for all: Is her destiny already written?
+          </p>
+        </div>
+
+        <div class="details-grid">
+          <div>
+            Reading age
+            <strong>8 - 11 years</strong>
+          </div>
+          <div>
+            Book
+            <strong>5 of 10</strong>
+          </div>
+          <div>
+            Print length
+            <strong>224 pages</strong>
+          </div>
+          <div>
+            Language
+            <strong>English</strong>
+          </div>
+          <div>
+            Grade level
+            <strong>3 - 7</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <aside class="buy-box">
+        <div class="prime-box">
+          <strong>Prime</strong><br>
+          Enjoy fast, free delivery, exclusive deals, and award-winning movies & TV shows.
+        </div>
+
+        <div class="format-options">
+          <div class="format-card">
+            Kindle Edition
+            <strong>$8.99</strong>
+          </div>
+          <div class="format-card">
+            Hardcover
+            <strong>$34.43</strong>
+          </div>
+          <div class="format-card active" style="grid-column: 1 / -1;">
+            Paperback
+            <strong>$16.99</strong>
+          </div>
+        </div>
+
+        <div class="price"><sup>$</sup>16<sup>99</sup></div>
+
+        <p class="delivery">
+          <strong>FREE delivery Friday, April 24</strong> on orders over $35
+        </p>
+
+        <p class="delivery" style="margin-top: 10px;">
+          Or <strong>Prime member</strong> get FREE delivery <strong>Tomorrow 10 a.m. - 3 p.m.</strong>
+        </p>
+
+        <p class="delivery" style="margin-top: 12px;">
+          Deliver to <a href="#">Calgary T2R 1C</a>
+        </p>
+
+        <div class="stock">In Stock</div>
+
+        <div class="qty-row">
+          <label for="qty">Quantity:</label>
+          <select id="qty">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+
+        <button class="cart-btn" onclick="addToCart()">Add to Cart</button>
+        <button class="buy-btn">Buy Now</button>
+
+        <p class="small-note">
+          Ships from Amazon.ca<br>
+          Sold by Amazon.ca<br><br>
+          Secure transaction
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    function addToCart() {
+      const qty = document.getElementById("qty").value;
+      alert(qty + " item(s) added to cart!");
+    }
+  </script>
+</body>
+</html>
