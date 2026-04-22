@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Survey Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f5f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background: #00bf6f;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .container {
+      width: 70%;
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .question {
+      margin-bottom: 25px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .question p {
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+      color: #444;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 200px;
+      margin: 30px auto 0;
+      padding: 12px;
+      background: #00bf6f;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: #00a85f;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">SurveyMonkey Style Survey</div>
+
+  <div class="container">
+    <h2>Customer Feedback Survey</h2>
+
+    <form>
+      <div class="question">
+        <p>1. How often do you use online surveys?</p>
+        <label><input type="radio" name="q1"> Daily</label>
+        <label><input type="radio" name="q1"> Weekly</label>
+        <label><input type="radio" name="q1"> Monthly</label>
+        <label><input type="radio" name="q1"> Rarely</label>
+      </div>
+
+      <div class="question">
+        <p>2. How satisfied are you with online survey platforms?</p>
+        <label><input type="radio" name="q2"> Very satisfied</label>
+        <label><input type="radio" name="q2"> Satisfied</label>
+        <label><input type="radio" name="q2"> Neutral</label>
+        <label><input type="radio" name="q2"> Dissatisfied</label>
+      </div>
+
+      <div class="question">
+        <p>3. Which device do you mostly use to complete surveys?</p>
+        <label><input type="radio" name="q3"> Laptop</label>
+        <label><input type="radio" name="q3"> Mobile phone</label>
+        <label><input type="radio" name="q3"> Tablet</label>
+        <label><input type="radio" name="q3"> Desktop computer</label>
+      </div>
+
+      <div class="question">
+        <p>4. How easy is it to understand most survey questions?</p>
+        <label><input type="radio" name="q4"> Very easy</label>
+        <label><input type="radio" name="q4"> Easy</label>
+        <label><input type="radio" name="q4"> Difficult</label>
+        <label><input type="radio" name="q4"> Very difficult</label>
+      </div>
+
+      <div class="question">
+        <p>5. How long should a good survey be?</p>
+        <label><input type="radio" name="q5"> 1–5 minutes</label>
+        <label><input type="radio" name="q5"> 5–10 minutes</label>
+        <label><input type="radio" name="q5"> 10–15 minutes</label>
+        <label><input type="radio" name="q5"> More than 15 minutes</label>
+      </div>
+
+      <div class="question">
+        <p>6. What motivates you to complete a survey?</p>
+        <label><input type="radio" name="q6"> Rewards</label>
+        <label><input type="radio" name="q6"> Interest in the topic</label>
+        <label><input type="radio" name="q6"> Helping improve services</label>
+        <label><input type="radio" name="q6"> Requirement from school/work</label>
+      </div>
+
+      <div class="question">
+        <p>7. How likely are you to recommend a survey platform to others?</p>
+        <label><input type="radio" name="q7"> Very likely</label>
+        <label><input type="radio" name="q7"> Likely</label>
+        <label><input type="radio" name="q7"> Unlikely</label>
+        <label><input type="radio" name="q7"> Very unlikely</label>
+      </div>
+
+      <div class="question">
+        <p>8. Which feature is most important in a survey tool?</p>
+        <label><input type="radio" name="q8"> Easy design</label>
+        <label><input type="radio" name="q8"> Fast response collection</label>
+        <label><input type="radio" name="q8"> Good analytics</label>
+        <label><input type="radio" name="q8"> Mobile-friendly interface</label>
+      </div>
+
+      <div class="question">
+        <p>9. How secure do you think online surveys are?</p>
+        <label><input type="radio" name="q9"> Very secure</label>
+        <label><input type="radio" name="q9"> Secure</label>
+        <label><input type="radio" name="q9"> Not very secure</label>
+        <label><input type="radio" name="q9"> Not secure at all</label>
+      </div>
+
+      <div class="question">
+        <p>10. Would you participate in more surveys in the future?</p>
+        <label><input type="radio" name="q10"> Definitely yes</label>
+        <label><input type="radio" name="q10"> Probably yes</label>
+        <label><input type="radio" name="q10"> Probably no</label>
+        <label><input type="radio" name="q10"> Definitely no</label>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Survey</button>
+    </form>
+  </div>
+
+</body>
+</html>
