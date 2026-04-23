@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scientific Calculator</title>
+  <title>Scientific Calculator with Converter</title>
   <style>
     * {
       box-sizing: border-box;
@@ -13,26 +13,34 @@
     body {
       margin: 0;
       min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
+      padding: 20px;
     }
 
-    .calculator {
-      width: 420px;
+    .app {
+      width: 950px;
+      max-width: 100%;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+    }
+
+    .panel {
       background: #111827;
-      padding: 20px;
       border-radius: 20px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
     }
 
     .title {
       color: white;
       text-align: center;
-      margin-bottom: 15px;
       font-size: 1.4rem;
       font-weight: bold;
+      margin-bottom: 15px;
     }
 
     .display {
@@ -43,7 +51,7 @@
       margin-bottom: 15px;
       background: #1f2937;
       color: white;
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       text-align: right;
       padding: 15px;
       outline: none;
@@ -58,7 +66,7 @@
     button {
       border: none;
       border-radius: 12px;
-      height: 60px;
+      height: 58px;
       font-size: 1rem;
       cursor: pointer;
       transition: 0.2s;
@@ -66,7 +74,7 @@
 
     button:hover {
       transform: scale(1.04);
-      opacity: 0.9;
+      opacity: 0.92;
     }
 
     .number {
@@ -94,53 +102,131 @@
       color: white;
       grid-column: span 2;
     }
+
+    .converter-section {
+      color: white;
+    }
+
+    .converter-section label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .converter-section select,
+    .converter-section input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .convert-btn {
+      width: 100%;
+      background: #10b981;
+      color: white;
+      margin-top: 10px;
+      font-size: 1rem;
+      height: 50px;
+    }
+
+    .result-box {
+      margin-top: 16px;
+      background: #1f2937;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 1.1rem;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      color: white;
+      word-break: break-word;
+    }
+
+    @media (max-width: 850px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="calculator">
-    <div class="title">Scientific Calculator</div>
-    <input type="text" id="display" class="display" disabled />
+  <div class="app">
+    <!-- Calculator -->
+    <div class="panel">
+      <div class="title">Scientific Calculator</div>
+      <input type="text" id="display" class="display" disabled />
 
-    <div class="buttons">
-      <button class="special" onclick="clearDisplay()">C</button>
-      <button class="special" onclick="deleteLast()">DEL</button>
-      <button class="function" onclick="appendValue('(')">(</button>
-      <button class="function" onclick="appendValue(')')">)</button>
-      <button class="operator" onclick="appendValue('/')">÷</button>
+      <div class="buttons">
+        <button class="special" onclick="clearDisplay()">C</button>
+        <button class="special" onclick="deleteLast()">DEL</button>
+        <button class="function" onclick="appendValue('(')">(</button>
+        <button class="function" onclick="appendValue(')')">)</button>
+        <button class="operator" onclick="appendValue('/')">÷</button>
 
-      <button class="function" onclick="applyFunction('sin')">sin</button>
-      <button class="function" onclick="applyFunction('cos')">cos</button>
-      <button class="function" onclick="applyFunction('tan')">tan</button>
-      <button class="function" onclick="appendValue('Math.PI')">π</button>
-      <button class="operator" onclick="appendValue('*')">×</button>
+        <button class="function" onclick="applyFunction('sin')">sin</button>
+        <button class="function" onclick="applyFunction('cos')">cos</button>
+        <button class="function" onclick="applyFunction('tan')">tan</button>
+        <button class="function" onclick="appendValue('Math.PI')">π</button>
+        <button class="operator" onclick="appendValue('*')">×</button>
 
-      <button class="function" onclick="applyFunction('log')">log</button>
-      <button class="function" onclick="applyFunction('ln')">ln</button>
-      <button class="function" onclick="applyFunction('sqrt')">√</button>
-      <button class="function" onclick="appendValue('Math.E')">e</button>
-      <button class="operator" onclick="appendValue('-')">−</button>
+        <button class="function" onclick="applyFunction('log')">log</button>
+        <button class="function" onclick="applyFunction('ln')">ln</button>
+        <button class="function" onclick="applyFunction('sqrt')">√</button>
+        <button class="function" onclick="appendValue('Math.E')">e</button>
+        <button class="operator" onclick="appendValue('-')">−</button>
 
-      <button class="function" onclick="appendValue('**2')">x²</button>
-      <button class="function" onclick="appendValue('**')">xʸ</button>
-      <button class="function" onclick="applyReciprocal()">1/x</button>
-      <button class="function" onclick="appendValue('%')">%</button>
-      <button class="operator" onclick="appendValue('+')">+</button>
+        <button class="function" onclick="appendValue('**2')">x²</button>
+        <button class="function" onclick="appendValue('**')">xʸ</button>
+        <button class="function" onclick="applyReciprocal()">1/x</button>
+        <button class="function" onclick="appendValue('%')">%</button>
+        <button class="operator" onclick="appendValue('+')">+</button>
 
-      <button class="number" onclick="appendValue('7')">7</button>
-      <button class="number" onclick="appendValue('8')">8</button>
-      <button class="number" onclick="appendValue('9')">9</button>
-      <button class="function" onclick="toggleSign()">±</button>
-      <button class="equal" onclick="calculateResult()">=</button>
+        <button class="number" onclick="appendValue('7')">7</button>
+        <button class="number" onclick="appendValue('8')">8</button>
+        <button class="number" onclick="appendValue('9')">9</button>
+        <button class="function" onclick="toggleSign()">±</button>
+        <button class="equal" onclick="calculateResult()">=</button>
 
-      <button class="number" onclick="appendValue('4')">4</button>
-      <button class="number" onclick="appendValue('5')">5</button>
-      <button class="number" onclick="appendValue('6')">6</button>
-      <button class="number" onclick="appendValue('.')">.</button>
-      <button class="number" onclick="appendValue('0')">0</button>
+        <button class="number" onclick="appendValue('4')">4</button>
+        <button class="number" onclick="appendValue('5')">5</button>
+        <button class="number" onclick="appendValue('6')">6</button>
+        <button class="number" onclick="appendValue('.')">.</button>
+        <button class="number" onclick="appendValue('0')">0</button>
 
-      <button class="number" onclick="appendValue('1')">1</button>
-      <button class="number" onclick="appendValue('2')">2</button>
-      <button class="number" onclick="appendValue('3')">3</button>
+        <button class="number" onclick="appendValue('1')">1</button>
+        <button class="number" onclick="appendValue('2')">2</button>
+        <button class="number" onclick="appendValue('3')">3</button>
+      </div>
+    </div>
+
+    <!-- Converter -->
+    <div class="panel converter-section">
+      <div class="title">Unit Converter</div>
+
+      <label for="category">Category</label>
+      <select id="category" onchange="updateUnits()">
+        <option value="length">Length</option>
+        <option value="weight">Weight</option>
+        <option value="temperature">Temperature</option>
+      </select>
+
+      <label for="inputValue">Value</label>
+      <input type="number" id="inputValue" placeholder="Enter value" />
+
+      <label for="fromUnit">From</label>
+      <select id="fromUnit"></select>
+
+      <label for="toUnit">To</label>
+      <select id="toUnit"></select>
+
+      <button class="convert-btn" onclick="convertUnits()">Convert</button>
+
+      <div class="result-box" id="convertResult">Result will appear here</div>
     </div>
   </div>
 
@@ -192,9 +278,7 @@
     function calculateResult() {
       try {
         let expression = display.value;
-
         expression = expression.replace(/(\d+(\.\d+)?)%/g, "($1/100)");
-
         let result = eval(expression);
 
         if (!isFinite(result)) {
@@ -222,6 +306,92 @@
         appendValue("%");
       }
     });
+
+    const units = {
+      length: ["meter", "kilometer", "centimeter", "mile", "foot", "inch"],
+      weight: ["kilogram", "gram", "pound"],
+      temperature: ["celsius", "fahrenheit", "kelvin"]
+    };
+
+    function updateUnits() {
+      const category = document.getElementById("category").value;
+      const fromUnit = document.getElementById("fromUnit");
+      const toUnit = document.getElementById("toUnit");
+
+      fromUnit.innerHTML = "";
+      toUnit.innerHTML = "";
+
+      units[category].forEach(unit => {
+        fromUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
+        toUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
+      });
+    }
+
+    function convertUnits() {
+      const category = document.getElementById("category").value;
+      const inputValue = parseFloat(document.getElementById("inputValue").value);
+      const fromUnit = document.getElementById("fromUnit").value;
+      const toUnit = document.getElementById("toUnit").value;
+      const resultBox = document.getElementById("convertResult");
+
+      if (isNaN(inputValue)) {
+        resultBox.textContent = "Please enter a valid number.";
+        return;
+      }
+
+      let result;
+
+      if (category === "length") {
+        const lengthToMeter = {
+          meter: 1,
+          kilometer: 1000,
+          centimeter: 0.01,
+          mile: 1609.34,
+          foot: 0.3048,
+          inch: 0.0254
+        };
+
+        result = inputValue * lengthToMeter[fromUnit] / lengthToMeter[toUnit];
+      }
+
+      else if (category === "weight") {
+        const weightToKg = {
+          kilogram: 1,
+          gram: 0.001,
+          pound: 0.453592
+        };
+
+        result = inputValue * weightToKg[fromUnit] / weightToKg[toUnit];
+      }
+
+      else if (category === "temperature") {
+        result = convertTemperature(inputValue, fromUnit, toUnit);
+      }
+
+      resultBox.textContent = `${inputValue} ${fromUnit} = ${result.toFixed(4)} ${toUnit}`;
+    }
+
+    function convertTemperature(value, from, to) {
+      let celsius;
+
+      if (from === "celsius") {
+        celsius = value;
+      } else if (from === "fahrenheit") {
+        celsius = (value - 32) * 5 / 9;
+      } else if (from === "kelvin") {
+        celsius = value - 273.15;
+      }
+
+      if (to === "celsius") {
+        return celsius;
+      } else if (to === "fahrenheit") {
+        return (celsius * 9 / 5) + 32;
+      } else if (to === "kelvin") {
+        return celsius + 273.15;
+      }
+    }
+
+    updateUnits();
   </script>
 </body>
 </html>
