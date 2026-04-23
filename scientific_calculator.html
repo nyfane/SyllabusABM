@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scientific Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    .calculator {
+      width: 420px;
+      background: #111827;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .title {
+      color: white;
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .display {
+      width: 100%;
+      height: 80px;
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      background: #1f2937;
+      color: white;
+      font-size: 1.8rem;
+      text-align: right;
+      padding: 15px;
+      outline: none;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      height: 60px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.04);
+      opacity: 0.9;
+    }
+
+    .number {
+      background: #374151;
+      color: white;
+    }
+
+    .operator {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .function {
+      background: #2563eb;
+      color: white;
+    }
+
+    .special {
+      background: #ef4444;
+      color: white;
+    }
+
+    .equal {
+      background: #10b981;
+      color: white;
+      grid-column: span 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="title">Scientific Calculator</div>
+    <input type="text" id="display" class="display" disabled />
+
+    <div class="buttons">
+      <button class="special" onclick="clearDisplay()">C</button>
+      <button class="special" onclick="deleteLast()">DEL</button>
+      <button class="function" onclick="appendValue('(')">(</button>
+      <button class="function" onclick="appendValue(')')">)</button>
+      <button class="operator" onclick="appendValue('/')">÷</button>
+
+      <button class="function" onclick="applyFunction('sin')">sin</button>
+      <button class="function" onclick="applyFunction('cos')">cos</button>
+      <button class="function" onclick="applyFunction('tan')">tan</button>
+      <button class="function" onclick="appendValue('Math.PI')">π</button>
+      <button class="operator" onclick="appendValue('*')">×</button>
+
+      <button class="function" onclick="applyFunction('log')">log</button>
+      <button class="function" onclick="applyFunction('ln')">ln</button>
+      <button class="function" onclick="applyFunction('sqrt')">√</button>
+      <button class="function" onclick="appendValue('Math.E')">e</button>
+      <button class="operator" onclick="appendValue('-')">−</button>
+
+      <button class="function" onclick="appendValue('**2')">x²</button>
+      <button class="function" onclick="appendValue('**')">xʸ</button>
+      <button class="function" onclick="applyReciprocal()">1/x</button>
+      <button class="function" onclick="appendValue('%')">%</button>
+      <button class="operator" onclick="appendValue('+')">+</button>
+
+      <button class="number" onclick="appendValue('7')">7</button>
+      <button class="number" onclick="appendValue('8')">8</button>
+      <button class="number" onclick="appendValue('9')">9</button>
+      <button class="function" onclick="toggleSign()">±</button>
+      <button class="equal" onclick="calculateResult()">=</button>
+
+      <button class="number" onclick="appendValue('4')">4</button>
+      <button class="number" onclick="appendValue('5')">5</button>
+      <button class="number" onclick="appendValue('6')">6</button>
+      <button class="number" onclick="appendValue('.')">.</button>
+      <button class="number" onclick="appendValue('0')">0</button>
+
+      <button class="number" onclick="appendValue('1')">1</button>
+      <button class="number" onclick="appendValue('2')">2</button>
+      <button class="number" onclick="appendValue('3')">3</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+
+    function appendValue(value) {
+      display.value += value;
+    }
+
+    function clearDisplay() {
+      display.value = "";
+    }
+
+    function deleteLast() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    function toggleSign() {
+      if (display.value) {
+        display.value = `(-1*(${display.value}))`;
+      }
+    }
+
+    function applyReciprocal() {
+      if (display.value) {
+        display.value = `1/(${display.value})`;
+      }
+    }
+
+    function applyFunction(func) {
+      if (display.value === "") return;
+
+      if (func === "sin") {
+        display.value = `Math.sin((${display.value}) * Math.PI / 180)`;
+      } else if (func === "cos") {
+        display.value = `Math.cos((${display.value}) * Math.PI / 180)`;
+      } else if (func === "tan") {
+        display.value = `Math.tan((${display.value}) * Math.PI / 180)`;
+      } else if (func === "log") {
+        display.value = `Math.log10(${display.value})`;
+      } else if (func === "ln") {
+        display.value = `Math.log(${display.value})`;
+      } else if (func === "sqrt") {
+        display.value = `Math.sqrt(${display.value})`;
+      }
+    }
+
+    function calculateResult() {
+      try {
+        let expression = display.value;
+
+        expression = expression.replace(/(\d+(\.\d+)?)%/g, "($1/100)");
+
+        let result = eval(expression);
+
+        if (!isFinite(result)) {
+          display.value = "Error";
+        } else {
+          display.value = result;
+        }
+      } catch {
+        display.value = "Error";
+      }
+    }
+
+    document.addEventListener("keydown", function (event) {
+      const key = event.key;
+
+      if (!isNaN(key) || ["+", "-", "*", "/", ".", "(", ")"].includes(key)) {
+        appendValue(key);
+      } else if (key === "Enter") {
+        calculateResult();
+      } else if (key === "Backspace") {
+        deleteLast();
+      } else if (key === "Escape") {
+        clearDisplay();
+      } else if (key === "%") {
+        appendValue("%");
+      }
+    });
+  </script>
+</body>
+</html>
